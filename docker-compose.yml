@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  bybit-mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bybit-mcp-server
+    restart: unless-stopped
+    ports:
+      - '80:8000' # Expose on port 80 externally, map to 8000 internally
+    environment:
+      - BYBIT_API_KEY=${BYBIT_API_KEY}
+      - BYBIT_API_SECRET=${BYBIT_API_SECRET}
+      - BYBIT_TESTNET=${BYBIT_TESTNET:-True}
+    volumes:
+      - ./logs:/app/logs # Mount logs directory
+    networks:
+      - mcp-network
+
+# Network configuration
+networks:
+  mcp-network:
+    driver: bridge
