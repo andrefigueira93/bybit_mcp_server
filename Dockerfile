@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Copy required files
 COPY pyproject.toml .
 COPY main.py .
-COPY .env .
+# COPY .env .
 
 # Install Python dependencies using pip directly
 RUN pip install --no-cache-dir .
